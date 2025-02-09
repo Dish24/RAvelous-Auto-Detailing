@@ -155,7 +155,7 @@
             border-radius: 8px;
             cursor: pointer;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 0px;
         }
 
         .send-button:hover {
@@ -204,6 +204,64 @@
         .social-media:hover {
             background-color: rgba(255, 255, 255, 0.3);
             transform: scale(1.05);
+        }
+
+        .reviews-title {
+            text-align: left;
+            margin-top: 100px;
+            font-size: 6em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .carousel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 80%;
+        }
+
+        .review-box {
+            min-width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 0px;
+            text-align: center;
+            transition: transform 0.5s ease-in-out;
+            margin-bottom: 100px;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 30%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            font-size: 2em;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10%;
+            margin-bottom: 100px;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
         }
 
         .footer {
@@ -255,6 +313,35 @@
         <button type="submit" class="send-button">SEND</button>
     </form>
 
+    <div class="reviews-title">REVIEWS</div>
+
+    <div class="carousel-container">
+        <button class="carousel-button prev" onclick="prevReview()">&#10094;</button>
+        <div class="carousel">
+            <div class="review-box">
+                <h3>John D.</h3>
+                <p>"Fantastic service! My car looks brand new again. Highly recommend RAvelous Auto Detailing!"</p>
+            </div>
+            <div class="review-box">
+                <h3>Emily R.</h3>
+                <p>"Super friendly staff and excellent attention to detail. I’ll definitely be back!"</p>
+            </div>
+            <div class="review-box">
+                <h3>Michael S.</h3>
+                <p>"They did an amazing job on my SUV. The ceramic coating is flawless!"</p>
+            </div>
+            <div class="review-box">
+                <h3>Sophia K.</h3>
+                <p>"Quick and professional service. My car hasn’t looked this good in years!"</p>
+            </div>
+            <div class="review-box">
+                <h3>David L.</h3>
+                <p>"Affordable prices for top-notch detailing. My car shines like it’s brand new!"</p>
+            </div>
+        </div>
+        <button class="carousel-button next" onclick="nextReview()">&#10095;</button>
+    </div>
+
     <div class="social-media-section">
         <a href="https://www.facebook.com/people/RAvelous-Auto-Detailing/100069772486073/" class="social-media" target="_blank">
             <img src="FacebookLogo.png" alt="Facebook">
@@ -275,14 +362,32 @@
     </div>
 
     <div class="footer">
-        <p>Disclaimer: This website is only developed to fullfil the requiremenet for IMD318 group assignment purposes ©RAvelous</p>
+        <p>Disclaimer: This website is only developed to fulfill the requirement for IMD318 group assignment purposes ©RAvelous</p>
     </div>
 </div>
 
 <script>
-    function resetForm(event) {
-        event.preventDefault();
-        event.target.reset();
+    let currentReview = 0;
+
+    function showReview(index) {
+        const reviews = document.querySelectorAll('.review-box');
+        const totalReviews = reviews.length;
+
+        reviews.forEach((review, i) => {
+            review.style.transform = `translateX(-${index * 100}%)`;
+        });
+    }
+
+    function prevReview() {
+        const reviews = document.querySelectorAll('.review-box');
+        currentReview = (currentReview > 0) ? currentReview - 1 : reviews.length - 1;
+        showReview(currentReview);
+    }
+
+    function nextReview() {
+        const reviews = document.querySelectorAll('.review-box');
+        currentReview = (currentReview < reviews.length - 1) ? currentReview + 1 : 0;
+        showReview(currentReview);
     }
 </script>
 
